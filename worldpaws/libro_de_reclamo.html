@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Reclamos - World Paws</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #D00D1E;
+            --secondary: #FEB744;
+            --success: #00A547;
+            --light: #FFFFFF;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .header {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 5px solid var(--secondary);
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 2.5rem;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .form-container {
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #b00c1a;
+            border-color: #b00c1a;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            color: #000;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e6a53c;
+            border-color: #e6a53c;
+            color: #000;
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: var(--primary);
+        }
+        
+        .success-message {
+            display: none;
+            background-color: var(--success);
+            color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer a {
+            color: var(--secondary);
+        }
+        
+        .footer a:hover {
+            color: var(--light);
+        }
+    </style>
+</head>
+<body>
+    <header class="header text-center">
+        <div class="container">
+            <a href="index.html" class="text-decoration-none text-light"><h1 class="logo">WORLD<span>PAWS</span></h1></a>
+            <p class="lead">Formulario de Reclamos y Soporte</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="success-message" id="successMessage">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-check-circle fa-3x me-3"></i>
+                <div>
+                    <h3>¡Gracias por contactarnos!</h3>
+                    <p class="mb-0">Hemos recibido tu reclamo y nos pondremos en contacto contigo en un plazo máximo de 48 horas hábiles.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <h2 class="form-title"><i class="fas fa-exclamation-triangle me-2"></i>Formulario de Reclamo</h2>
+            <p class="text-muted mb-4">Todos los campos marcados con <span class="text-danger">*</span> son obligatorios.</p>
+            
+            <form id="complaintForm">
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <h5><i class="fas fa-user me-2"></i>Datos del Cliente</h5>
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label required-field">Nombre completo</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label required-field">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label required-field">Teléfono de contacto</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="orderNumber" class="form-label">Número de pedido (si aplica)</label>
+                            <input type="text" class="form-control" id="orderNumber">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-tag me-2"></i>Tipo de Reclamo</h5>
+                        <div class="mb-3">
+                            <label class="form-label required-field">Selecciona el tipo de reclamo</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="complaintType" id="defectiveProduct" value="Producto defectuoso o dañado" required>
+                                <label class="form-check-label" for="defectiveProduct">Producto defectuoso o dañado</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="complaintType" id="wrongOrder" value="Error en el pedido">
+                                <label class="form-check-label" for="wrongOrder">Error en el pedido</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="complaintType" id="vetService" value="Problema con servicio veterinario">
+                                <label class="form-check-label" for="vetService">Problema con servicio veterinario</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="complaintType" id="deliveryDelay" value="Retraso en la entrega">
+                                <label class="form-check-label" for="deliveryDelay">Retraso en la entrega</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="complaintType" id="otherType" value="Otro">
+                                <label class="form-check-label" for="otherType">Otro</label>
+                            </div>
+                            <div class="mt-2" id="otherTypeContainer" style="display: none;">
+                                <input type="text" class="form-control" id="otherTypeText" placeholder="Especificar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5><i class="fas fa-info-circle me-2"></i>Detalles del Reclamo</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="productName" class="form-label required-field">Nombre del producto o servicio</label>
+                            <input type="text" class="form-control" id="productName" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="productCode" class="form-label">Código o lote (si es comida/medicina)</label>
+                            <input type="text" class="form-control" id="productCode">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="complaintDetails" class="form-label required-field">Descripción del problema</label>
+                        <textarea class="form-control" id="complaintDetails" rows="4" required placeholder="Ej: 'El collar llegó roto', 'La comida estaba vencida', 'El veterinario no llegó a la cita programada'"></textarea>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5><i class="fas fa-check-circle me-2"></i>Solución Esperada</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="solutionType" id="refund" value="Reembolso" required>
+                        <label class="form-check-label" for="refund">Reembolso</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="solutionType" id="replacement" value="Reemplazo del producto">
+                        <label class="form-check-label" for="replacement">Reemplazo del producto</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="solutionType" id="resend" value="Nuevo envío">
+                        <label class="form-check-label" for="resend">Nuevo envío</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="solutionType" id="reschedule" value="Reprogramación de servicio veterinario">
+                        <label class="form-check-label" for="reschedule">Reprogramación de servicio veterinario</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="solutionType" id="otherSolution" value="Otro">
+                        <label class="form-check-label" for="otherSolution">Otro</label>
+                    </div>
+                    <div class="mt-2" id="otherSolutionContainer" style="display: none;">
+                        <input type="text" class="form-control" id="otherSolutionText" placeholder="Especificar">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5><i class="fas fa-paperclip me-2"></i>Adjuntos (Opcional)</h5>
+                    <div class="mb-3">
+                        <label for="fileUpload" class="form-label">Fotos o documentos que respalden tu reclamo</label>
+                        <input class="form-control" type="file" id="fileUpload" multiple>
+                        <div class="form-text">Puedes subir imágenes del producto dañado, factura, receta médica, etc.</div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <h6><i class="fas fa-info-circle me-2"></i>Notas Importantes</h6>
+                    <ul class="mb-0">
+                        <li><strong>Tiempo de respuesta:</strong> Nos contactaremos en un plazo máximo de <strong>48 horas hábiles</strong>.</li>
+                        <li><strong>Política de devoluciones:</strong> Consulta nuestros términos en <a href="#" class="alert-link">www.worldpaws.com/devoluciones</a>.</li>
+                        <li><strong>Urgencias veterinarias:</strong> Para emergencias, llama al <strong>+1 (555) 123-4567</strong>.</li>
+                    </ul>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="reset" class="btn btn-secondary btn-lg"><i class="fas fa-times me-2"></i>Cancelar</button>
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-paper-plane me-2"></i>Enviar Reclamo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>World Paws</h5>
+                    <p>Todo para tus mascotas</p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>Contacto</h5>
+                    <p><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope me-2"></i>soporte@worldpaws.com</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Síguenos</h5>
+                    <a href="#" class="text-decoration-none me-2"><i class="fab fa-facebook fa-2x"></i></a>
+                    <a href="#" class="text-decoration-none me-2"><i class="fab fa-instagram fa-2x"></i></a>
+                    <a href="#" class="text-decoration-none"><i class="fab fa-twitter fa-2x"></i></a>
+                </div>
+            </div>
+            <hr class="my-3 bg-light">
+            <p class="mb-0">&copy; 2023 World Paws. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar campo "Otro" en tipo de reclamo
+            const otherTypeRadio = document.getElementById('otherType');
+            const otherTypeContainer = document.getElementById('otherTypeContainer');
+            
+            otherTypeRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    otherTypeContainer.style.display = 'block';
+                } else {
+                    otherTypeContainer.style.display = 'none';
+                    document.getElementById('otherTypeText').value = '';
+                }
+            });
+            
+            // Mostrar campo "Otro" en solución esperada
+            const otherSolutionRadio = document.getElementById('otherSolution');
+            const otherSolutionContainer = document.getElementById('otherSolutionContainer');
+            
+            otherSolutionRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    otherSolutionContainer.style.display = 'block';
+                } else {
+                    otherSolutionContainer.style.display = 'none';
+                    document.getElementById('otherSolutionText').value = '';
+                }
+            });
+            
+            // Manejar el envío del formulario
+            const complaintForm = document.getElementById('complaintForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            complaintForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validación simple
+                const requiredFields = this.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('is-invalid');
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+                
+                if (!isValid) {
+                    alert('Por favor completa todos los campos obligatorios.');
+                    return;
+                }
+                
+                // Simular envío (en un caso real sería una petición AJAX)
+                this.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Scroll hasta el mensaje de éxito
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Opcional: Resetear el formulario después de 5 segundos
+                setTimeout(() => {
+                    this.reset();
+                    this.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    otherTypeContainer.style.display = 'none';
+                    otherSolutionContainer.style.display = 'none';
+                }, 10000);
+            });
+        });
+    </script>
+</body>
+</html>
